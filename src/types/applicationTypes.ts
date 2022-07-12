@@ -2,14 +2,14 @@ export type Owner = {
     login: string
 }
 
-export type User = {
+export interface User {
     stargazers_count?: number,
     owner?: Owner,
     username?: string,
     count?: number
 }
 
-export type Result = {
+export interface Result {
     winner: string,
     loser: string,
     draw: boolean
@@ -21,11 +21,19 @@ export type ResultAndUsers = {
     result: Result
 }
 
+// export interface UserRepo {
+//     name?: string,
+//     stargazers_count: number,
+//     owner: Owner,
+
+// }
+
 export type Query = {
     rows: Rows[]
 }
 
-export type Rows = {
+export interface Rows {
+    id?: number,
     username: string,
     wins: number,
     losses: number,

@@ -8,23 +8,22 @@ const API = 'http://api.github.com';
 
 async function lookForUsers(firstUser: string, secondUser: string) {
 
-    const firstUserSearch = await axios.get(`${API}/users/${firstUser}/repos`);
-    const secondUserSearch = await axios.get(`${API}/users/${secondUser}/repos`);
+    const firstUserSearch = await axios.get<User[]>(`${API}/users/${firstUser}/repos`);
+    const secondUserSearch = await axios.get<User[]>(`${API}/users/${secondUser}/repos`);
 
     return {
         firstUser: firstUserSearch.data,
         secondUser: secondUserSearch.data
     };
-
 }
 
-async function countStars(user: User[]) {
+async function countStars(users: User[]) {
     let count = 0;
 
-    user.forEach(repo => count += repo.stargazers_count);
+    users.forEach(repo => count += repo.stargazers_count);
 
     return {
-        username: user[0].owner.login,
+        username: users[0].owner.login,
         count
     };
 }
